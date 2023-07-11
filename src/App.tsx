@@ -1,5 +1,7 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Home } from "./pages/Home";
+
+import { BrowserRouter } from "react-router-dom";
+import Routes from "./routes";
 
 const Theme = createTheme({
   typography: {
@@ -9,9 +11,11 @@ const Theme = createTheme({
 
 const App = () => {
   return (
-    <ThemeProvider theme={Theme}>
-      <Home />
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={Theme}>
+        <Routes />
+      </ThemeProvider>
+    </BrowserRouter>
   );
 };
 

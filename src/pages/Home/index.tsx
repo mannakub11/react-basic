@@ -3,7 +3,7 @@ import { Button, Typography } from "@mui/material";
 
 import { Container } from "./style";
 
-export const Home = () => {
+const Home = () => {
   const [count, setCount] = useState<number>(0);
 
   const countUI = useMemo(() => {
@@ -25,3 +25,5 @@ export const Home = () => {
     </Container>
   );
 };
+
+export default Home;
