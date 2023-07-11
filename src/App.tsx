@@ -1,8 +1,5 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import { useCallback, useMemo, useState } from "react";
 import { styled } from "styled-components";
-
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Button, Typography } from "@mui/material";
 
@@ -24,18 +21,27 @@ const Container = styled.div`
   }
 `;
 
-const H1Styled = styled.h1`
-  color: red;
-`;
-
 const App = () => {
+  const [count, setCount] = useState<number>(0);
+
+  const countUI = useMemo(() => {
+    const isEvent = count % 2 === 0;
+    return (
+      <Typography variant="h1" color={"red"}>
+        Count: {count} is {isEvent ? "Event" : "Odd"}
+      </Typography>
+    );
+  }, [count]);
+
+  const onClickButton = useCallback(() => {
+    setCount((prevValue: number) => prevValue + 1);
+  }, [setCount]);
+
   return (
     <ThemeProvider theme={Theme}>
       <Container>
-        <Typography variant="h1" color={"red"}>
-          Hello World
-        </Typography>
-        <Button> Click me</Button>
+        {countUI}
+        <Button onClick={onClickButton}>Click me</Button>
       </Container>
     </ThemeProvider>
   );
