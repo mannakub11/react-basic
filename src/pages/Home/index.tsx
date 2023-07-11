@@ -1,10 +1,20 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import { Container } from "./style";
-import Counter from "./Component/Counter";
+
+import { Button, Typography } from "@mui/material";
 
 const Home = () => {
   const [count, setCount] = useState<number>(0);
+
+  const countUI = useMemo(() => {
+    const isEvent = count % 2 === 0;
+    return (
+      <Typography variant="h1" color={"red"}>
+        Count: {count} is {isEvent ? "Event" : "Odd"}
+      </Typography>
+    );
+  }, [count]);
 
   const onClickButton = useCallback(() => {
     setCount((prevValue: number) => prevValue + 1);
@@ -12,7 +22,8 @@ const Home = () => {
 
   return (
     <Container>
-      <Counter count={count} setCount={setCount} onClick={onClickButton} />
+      {countUI}
+      <Button onClick={onClickButton}>Click me</Button>;
     </Container>
   );
 };
